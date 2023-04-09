@@ -1,0 +1,15 @@
+const url = require("url");
+const address = "http://wwww.meusite.com/catalago?produto=cadeira";
+const parsedURL = new url.URL(address);
+console.log(parsedURL.hash);
+console.log(parsedURL.host);
+console.log(parsedURL.hostname);
+console.log(parsedURL.href);
+console.log(parsedURL.origin);
+console.log(parsedURL.password);
+console.log(parsedURL.pathname);
+console.log(parsedURL.port);
+console.log(parsedURL.protocol);
+console.log(parsedURL.search);
+console.log(parsedURL.searchParams);
+console.log(parsedURL.searchParams.get("produto"));
