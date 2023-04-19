@@ -1,0 +1,21 @@
+{
+  "name": "meu_projeto",
+  "version": "1.0.0",
+  "description": "meu primeiro projeto em npm",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "keywords": [
+    "npm"
+  ],
+  "author": "rodrigo rodrigues",
+  "license": "ISC",
+  "dependencies": {
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "validator": "^13.9.0"
+  }
+}
