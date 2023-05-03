@@ -1,0 +1,16 @@
+* O que são bancos de dados relacionais?
+São constituídos por algumas entedidas.
+
+Banco de dados: um banco para guardar os dados do projeto.
+Tabelas: onde categorizamos os dados e os inserimos.
+Colunas:
+Dados:
+Relacionamentos:
+O banco de dados é um arquivo e um SGDB é utilizado para manipular este arquivo.
+
+* O que é MySQL?
+
+Sistema gerenciador de banco de dados.
+Outros exemplos: MySQL, Oracle, Postgresql, SQL Server.
+
+* Usando o MySQL no terminal
