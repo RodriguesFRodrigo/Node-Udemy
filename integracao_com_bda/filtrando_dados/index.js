@@ -8,9 +8,9 @@ const app = express();
 app.use(
   express.urlencoded({
     extended: true,
-  }),
-)
-app.use(express.json())
+  })
+);
+app.use(express.json());
 
 // Setup handlebars
 app.engine("handlebars", exphbs.engine());
@@ -19,6 +19,7 @@ app.set("view engine", "handlebars");
 // Setup arquivos estáticos
 app.use(express.static("public"));
 
+// Home
 app.get("/", (req, res) => {
   res.render("home");
 });
@@ -27,7 +28,7 @@ app.get("/", (req, res) => {
 app.post("/books/insertbook", (req, res) => {
   const book = {
     title: req.body.title,
-    pages: req.body.pages
+    pages: req.body.pages,
   };
 
   const query = `
@@ -50,25 +51,26 @@ app.post("/books/insertbook", (req, res) => {
 });
 
 // Read - R
-app.get('/books', function (req, res) {
+app.get("/books", function (req, res) {
   const query = `
     SELECT * 
     FROM books
-  `
+  `;
 
   conn.query(query, function (err, data) {
     if (err) {
-      console.log(err)
+      console.log(err);
     }
 
-    const books = data
+    const books = data;
 
-    console.log(data)
+    console.log(data);
 
-    res.render('books', { books })
-  })
-})
+    res.render("books", { books });
+  });
+});
 
+// Read - R / Filter
 app.get("/books/:id", function (req, res) {
   const id = req.params.id;
 
@@ -76,7 +78,7 @@ app.get("/books/:id", function (req, res) {
     SELECT *
     FROM BOOKS
     WHERE ID = '${id}'
-  `
+  `;
 
   conn.query(query, function (err, data) {
     if (err) {
@@ -87,18 +89,16 @@ app.get("/books/:id", function (req, res) {
     console.log(book);
 
     res.render("book", { book });
-  })
+  });
 });
 
 // Conexão MySQL
-const conn = mysql.createConnection(
-  {
-    host: "localhost",
-    user: "root",
-    password: "Password",
-    database: "nodemysql2"
-  }
-);
+const conn = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "Password",
+  database: "nodemysql2",
+});
 
 conn.connect(function (err) {
   if (err) {
@@ -107,4 +107,4 @@ conn.connect(function (err) {
     console.log("Conexão com o MySQL estabelecida!");
     app.listen(3000);
   }
-})
+});
