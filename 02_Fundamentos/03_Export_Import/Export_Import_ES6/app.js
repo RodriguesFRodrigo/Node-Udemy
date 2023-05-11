@@ -6,4 +6,4 @@ import * as Utils from 'app.js'; // Importar tudo
 Utils.myLogger(); // Permite acessar membros exportados
 
 
-import Logger, { Alligator, myNumbers } from 'app.js'; // Defaul na frete
+import Logger, { Alligator, myNumbers } from 'app.js'; // Default na sempre na frente

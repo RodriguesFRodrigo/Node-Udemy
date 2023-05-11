@@ -1,6 +1,6 @@
 const express = require("express");
 const exphbs = require("express-handlebars");
-// Importa conexão ORM
+// Importa a conexão ORM
 const conn = require("./db/conn");
 
 const app = express();
