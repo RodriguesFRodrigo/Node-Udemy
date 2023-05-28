@@ -8,7 +8,7 @@ const sequelize = new Sequelize('toughts2', 'root', 'Password', {
 
 // Testando a conexão
 try {
-  await sequelize.authenticate()
+  sequelize.authenticate()
   console.log("Conectamos com sucesso!")
 } catch (err) {
   console.log(`Não foi possível conectar: ${err}`)
