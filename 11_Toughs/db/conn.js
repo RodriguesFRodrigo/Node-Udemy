@@ -1,13 +1,14 @@
 const { Sequelize } = require('sequelize')
 
-// Scheme, root user and password
+// database, username and password
 const sequelize = new Sequelize('toughts2', 'root', 'Password', {
-  host: 'localhost',
+  host: 'localhost', // IP
   dialect: 'mysql',
 })
 
+// Testando a conexão
 try {
-  sequelize.authenticate()
+  await sequelize.authenticate()
   console.log("Conectamos com sucesso!")
 } catch (err) {
   console.log(`Não foi possível conectar: ${err}`)
