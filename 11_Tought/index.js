@@ -4,6 +4,10 @@ const session = require('express-session')
 const FileStore = require('session-file-store')(session)
 const flash = require('express-flash')
 const conn = require('./db/conn')
+const Tought = require('./models/Tought')
+const User = require('./models/User')
+const toughtsRoutes = require('./routes/toughtsRoutes')
+const ToughtsController = require('./controllers/ToughtsController')
 
 const app = express()
 
@@ -62,6 +66,8 @@ app.use((req, res, next) => {
 
 app.use(express.json())
 
+app.use('/toughts', toughtsRoutes)
+app.get('/', ToughtsController.showToughts)
 conn
   .sync()
   .then(() => {
