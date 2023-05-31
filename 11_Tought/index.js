@@ -52,7 +52,7 @@ app.use(
 )
 
 // flash messages
-app.use(flash())
+app.use(flash()) // Pode ser acessado nas requisições req.flash ...
 
 // public path
 app.use(express.static('public'))
