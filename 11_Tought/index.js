@@ -8,6 +8,8 @@ const Tought = require('./models/Tought')
 const User = require('./models/User')
 const toughtsRoutes = require('./routes/toughtsRoutes')
 const ToughtsController = require('./controllers/ToughtsController')
+const authRoutes = require('./routes/authRoutes')
+const AuthController = require('./controllers/AuthController')
 
 const app = express()
 
@@ -67,7 +69,9 @@ app.use((req, res, next) => {
 app.use(express.json())
 
 app.use('/toughts', toughtsRoutes)
+app.use('/', authRoutes)
 app.get('/', ToughtsController.showToughts)
+
 conn
   .sync()
   .then(() => {
