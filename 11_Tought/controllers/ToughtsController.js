@@ -1,6 +1,7 @@
 const Tought = require('../models/Tought')
 const User = require('../models/User')
 
+const { Op } = require('sequelize')
 module.exports = class ToughtsController {
   static async dashboard(req, res) {
     const userId = req.session.userid;
@@ -27,7 +28,32 @@ module.exports = class ToughtsController {
   }
 
   static async showToughts(req, res) {
-    res.render('toughts/home')
+    let search = ''
+    let order = 'DESC'
+
+    if (req.query.search) {
+      search = req.query.search
+    }
+
+    if (req.query.order === 'old') {
+      order = 'ASC'
+    } else {
+      order = 'DESC'
+    }
+
+    const data = await Tought.findAll({
+      include: User,
+      where: {
+        title: { [Op.like]: `%${search}%` },
+      },
+      order: [['createdAt', order]]
+    })
+
+    const toughts = data.map((tought) => tought.get({ plain: true })) // Get coloca tudo no mesmo array
+
+    const total = toughts.length === 0 ? false : toughts.length
+
+    res.render('toughts/home', { toughts, search, total })
   }
 
   static createTought(req, res) {
@@ -67,5 +93,32 @@ module.exports = class ToughtsController {
       console.log(error)
     }
 
+  }
+
+  static async updateTought(req, res) {
+    const id = req.params.id;
+
+    const tought = await Tought.findOne({ where: { id: id }, raw: true })
+
+    res.render('toughts/edit', { tought })
+  }
+
+  static async updateToughtPost(req, res) {
+    try {
+      const id = req.body.id;
+      const tought = {
+        title: req.body.title
+      }
+
+      await Tought.update(tought, { where: { id: id } })
+
+      req.flash('message', 'Pensamento atualizado com sucesso!')
+
+      req.session.save(() => {
+        res.redirect('/toughts/dashboard')
+      })
+    } catch (error) {
+      console.log(error)
+    }
   }
 }
